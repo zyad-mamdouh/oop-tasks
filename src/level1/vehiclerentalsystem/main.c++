@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <vector>
 using namespace std;
 #include <string>
 #include <chrono>
@@ -44,7 +45,7 @@ public:
         if (this->dailyRate <= 0.0)
             throw std::invalid_argument("Daily rate must be positive");
     }
-string getvehicleId(){
+const std::string& getId() const{
     return vehicleId;
 }
   void getVehicleInfo() const {
@@ -137,6 +138,7 @@ void getCustomerInfo() const {
 
 };
 class Rental{
+
     private :
     std::string rentalId;
     Customer& customer;
@@ -195,10 +197,35 @@ class Rental{
 void getRentalInfo() const {
         cout << "rentalId: " << rentalId
             << "\ncustomerName: " << customer.getname()
-            << "\vehicle: " << vehicle.getvehicleId();
+            << "\vehicle: " << vehicle.getId();
        
     }
 
+};
+class RentalAgency {
+private:
+    std::string agencyName;
+    std::vector<Vehicle> vehicles;
+    std::vector<Customer> customers;
+    std::vector<Rental> rentals;
+public:
+explicit RentalAgency (std::string agencyName): 
+ agencyName(std::move(agencyName))
+{
+if (this->agencyName.empty())
+throw std::invalid_argument("Agency name cannot be empty");
+}
+void addVehicle(const Vehicle& v){
+    for (const Vehicle&  e: vehicles){
+        if (e.getId()==v.getId())
+              throw std::logic_error("Vehicle already exists");
+   
+    }
+     vehicles.push_back(v);
+
+
+}
+   
 };
 int main() {
     std::cout << "Vehicle Rental System" << std::endl;
