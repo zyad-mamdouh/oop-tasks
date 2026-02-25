@@ -124,8 +124,11 @@ public:
         if (!isDigitsOnly(this->phone))
             throw std::invalid_argument("Phone must contain digits only");
     }
-    string getname()const{
+  const std::string& getname()const{
         return name;
+    }
+     const std::string& getId()const{
+        return customerId;
     }
 void getCustomerInfo() const {
         cout << "ID: " << customerId
@@ -222,8 +225,13 @@ void addVehicle(const Vehicle& v){
    
     }
      vehicles.push_back(v);
-
-
+}
+void registerCustomer (const Customer& c){
+    for(const Customer& e: customers ){
+        if (e.getId() ==c.getId())
+             throw std::logic_error("Customer already exists");
+    }
+    customers.push_back(c);
 }
    
 };
