@@ -152,8 +152,7 @@ class Order{
     // - `addItem(menuItem, quantity, instructions)`: Adds item to order
 
     void addItem( const MenuItem&  menuItem , int quantity ,const  std::string&  instructions) {
-        OrderItem Item (menuItem,quantity ,instructions);
-        orderItems.emplace_back(Item);
+       orderItems.emplace_back(menuItem, quantity, instructions);
     }
 
 };
