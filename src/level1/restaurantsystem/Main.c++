@@ -42,7 +42,31 @@ public:
 
 
 
-    std::string getItemInfo()const {
+   const std::string&  getId()const{
+    return itemid;
+   }
+   
+   const std::string&  getName()const{
+    return name;
+   }
+   const std::string&  getDescription() const{
+    return description;
+   }
+   
+    const std::string&  getCategory() const{
+    return category;
+   }
+    double getPrice()const{
+    return price;
+   }
+     bool Available()const{
+        return isAvailable;
+    }
+    void setAvailability (bool  Available){
+        this->isAvailable=Available;
+    }
+   
+ std::string getItemInfo()const {
       
         std::ostringstream info;
 
