@@ -1,6 +1,8 @@
 #include <sstream>
 #include <string>
 #include <stdexcept>
+#include <list>
+#include <chrono>
 
 class MenuItem{
 private:
@@ -12,10 +14,7 @@ private:
    bool isAvailable;
     
 public:
-    MenuItem(std::string itemid,
-           std::string name ,
-           std::string description,
-           double price ,
+    MenuItem(std::string itemid,std::string name ,std::string description,double price ,
           std::string category )
        :itemid(std::move(itemid)),
         name(std::move(name)),
@@ -59,18 +58,37 @@ return info.str();
 };
 class OrderItem{
     private:
-
+    MenuItem menuItem;
+    int quantity ;
+    std::string specialInstructions;
 
     public:
+    OrderItem(const MenuItem& menuItem ,int quantity ,std::string specialInstructions ) 
+    : menuItem(menuItem),
+      quantity(quantity),
+      specialInstructions(std::move(specialInstructions))
+    {
+
+    }
 
 
 };
 
 class Order{
     private:
-
+    std::string orderId;
+    int tableNumber;
+    std::list <OrderItem> orderItems;
+    std::chrono::system_clock::time_point orderTime;
+    std::string status; 
 
     public:
+    Order( std::string orderId, int tableNumber )
+    :orderId(std::move(orderId)),
+    tableNumber(tableNumber),
+    orderTime(std::chrono::system_clock::now()),
+    status("Pending")
+    {}
 
 
 
@@ -78,9 +96,15 @@ class Order{
 
 class Menu{
     private:
-
+    std::string restaurantName;
+    std::list<MenuItem> menuItems;
 
     public:
+    Menu(std::string restaurantName )
+    :restaurantName(std::move(restaurantName))
+    {
+
+    }
 
 
 
@@ -88,10 +112,19 @@ class Menu{
 
 class Restaurant{
     private:
-
+     std::string restaurantName;
+     Menu menu;
+     std::list<Order> orders;
+     double taxRate;
 
     public:
+     Restaurant(const std::string& restaurantName,double taxRate)
+     :restaurantName (restaurantName),
+      menu(this->restaurantName),
+     taxRate(taxRate)
 
+     {}
+     
 
 
 };
