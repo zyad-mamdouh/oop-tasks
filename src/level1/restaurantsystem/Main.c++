@@ -167,7 +167,7 @@ class Order{
     }
 
   double getSubtotal() const{
-    
+
     double s = 0;
 
     for(const auto& item : orderItems){
@@ -175,6 +175,16 @@ class Order{
     }
     return s;
 }
+double getTax()const{
+    return getSubtotal()*0.08;
+}
+//O(n)
+double getTotal()const{
+    double subtotal=getSubtotal();
+    return subtotal+subtotal*0.08 ;
+    
+}
+
 };
 
 class Menu{
