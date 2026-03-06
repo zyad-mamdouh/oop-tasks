@@ -132,7 +132,7 @@ class Order{
     private:
     std::string orderId;
     int tableNumber;
-    std::list <OrderItem> orderItems;
+    std::vector <OrderItem> orderItems;
     std::chrono::system_clock::time_point orderTime;
      OrderStatus status; 
 
@@ -153,6 +153,17 @@ class Order{
 
     void addItem( const MenuItem&  menuItem , int quantity ,const  std::string&  instructions) {
        orderItems.emplace_back(menuItem, quantity, instructions);
+    }
+    void remove(const std::string& id){
+         for (auto it = orderItems.begin(); it != orderItems.end(); ++it){
+            if(id==it->getMenuItem().getId()){
+             orderItems.erase(it);
+             return;
+            }
+          
+        }
+            throw std::logic_error("Item dosent exist in order");
+        
     }
 
 };
