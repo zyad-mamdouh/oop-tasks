@@ -1,8 +1,11 @@
+#include <iostream>
 #include <sstream>
 #include <string>
 #include <stdexcept>
 #include <list>
+#include <vector>
 #include <chrono>
+using namespace std;
 
 class MenuItem{
 private:
@@ -254,8 +257,58 @@ class Menu{
         }
      throw std::logic_error("Item doesn't exist in menu");
    }
+   const std::vector<MenuItem>& getItemsByCategory(const std::string& category )const{
+       std::vector<MenuItem> result;
+     
+    for(const auto& it : menuItems){
+        if (it.getCategory()==category)
+        result.push_back(it);
+     }
+   return result;
+     
+   }
+   //- `searchItems(keyword)`: Search items by name
+    std::vector<MenuItem> searchItems(const std::string& keyword )const{
+     std::vector<MenuItem> result;
+     for(const auto& it : menuItems){
+       if(it.getName().find(keyword)!=std::string::npos)
+         result.push_back(it);
+     }
+     return result;
+   }
+  void displayMenu() const {
 
+    std::cout << "=== " << restaurantName << " Menu ===\n\n";
 
+    std::vector<std::string> categories = {
+        "Appetizer",
+        "Main Course",
+        "Dessert",
+        "Beverage"
+    };
+
+    for (const auto& category : categories) {
+
+        std::cout << category << ":\n";
+        auto items = getItemsByCategory(category);
+
+        for (const auto& item : items) {
+
+            if (item.Available()) {
+                std::cout << "- "
+                          << item.getName()
+                          << ": "
+                          << item.getDescription()
+                          << " - $"
+                          << item.getPrice()
+                          << "\n";
+            }
+
+        }
+
+        std::cout << "\n";
+    }
+}
 };
 
 class Restaurant{
