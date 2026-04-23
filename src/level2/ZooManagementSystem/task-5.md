@@ -54,8 +54,8 @@ Create an abstract `Animal` class with the following:
 
 #### Parrot Class
 - Additional properties: `canTalk`, `vocabulary` (List/Array of strings)
-- Override `makeSound()`: Returns "Squawk!"git commit -m "Complete Zoo Management System (OOP task 5)"
-- Add method: `speak()`: Returns a random word from vocabulary
+- Override `makeSound()`: Returns "Squawk!"
+- - Add method: `speak()`: Returns a random word from vocabulary
 
 #### Eagle Class
 - Additional properties: `wingspan`, `diveSpeed`
