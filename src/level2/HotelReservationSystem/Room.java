@@ -25,7 +25,7 @@ public class Room {
     }
 
 
-   public double getPrice(int N){
+   public double getPrice(long N){
         return N*pricePerNight;
    }
 
